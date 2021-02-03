@@ -1,5 +1,5 @@
 import {createContext, useState} from 'react'
-import { datum, dataRes} from '../type'
+import { dataRes} from '../type'
 import giosg_api from '../fetch/giosg_api'
 
 export const DataContext = createContext<ContextType>({})
@@ -10,7 +10,6 @@ export const DataContextProvider =  (props: props) => {
     const fetchData = () => {
         giosg_api.get().then((res: any) => {
             const resData= JSON.parse(JSON.stringify(res.data)) as dataRes
-            console.log(resData)
             setData(resData)
         })
     }
