@@ -6,12 +6,11 @@ const Header = () => {
     const { fetchData } = useContext(DataContext)
     const [startDate, setStartDate] = useState<string>('2017-05-01')
     const [endDate, setEndDate] = useState<string>('2017-06-15')
-    const [token, setToken] = useState<string>()
+    const [token, setToken] = useState<string>('38ab33b9f32a3478555d1e06189d50f01a872966')
 
     const onSubmit = (event: FormEvent) => {
         event.preventDefault()
-        console.log(event)
-        if(fetchData !== undefined) fetchData()
+        if(fetchData !== undefined) fetchData(startDate, endDate, token)
     }
 
     return (
@@ -32,10 +31,28 @@ const Header = () => {
                         }}
                     />
                     <label>End Date</label>
-                    <input name='end_date' type="date" placeholder="yyyy-mm-dd" min='2017-05-01' max='2017-06-15'/>
+                    <input 
+                        name='end_date' 
+                        type="date" 
+                        placeholder="yyyy-mm-dd" 
+                        min='2017-05-01' 
+                        max='2017-06-15'
+                        value ={endDate}
+                        onChange = {(ev) => {
+                            const newDate = new Date(ev.target.value)
+                            setEndDate(newDate.toISOString().split("T")[0])
+                        }}
+                    />
                 </div>
                 <label>Token</label>
-                <input name='token'/>
+                <input 
+                    name='token'
+                    value ={token}
+                        onChange = {(ev) => {
+                            const newDate = new Date(ev.target.value)
+                            setToken(newDate.toISOString().split("T")[0])
+                        }}
+                />
                 <button className='hover'>Submit</button>
             </form>
         </div>

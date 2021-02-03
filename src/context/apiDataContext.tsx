@@ -1,14 +1,15 @@
-import {createContext, useState} from 'react'
+import { createContext, useState } from 'react'
 import { dataRes} from '../type'
-import giosg_api from '../fetch/giosg_api'
+import instance from '../fetch/giosg_api'
 
 export const DataContext = createContext<ContextType>({})
 
 export const DataContextProvider =  (props: props) => {
     const [data, setData] = useState<dataRes>()
 
-    const fetchData = () => {
-        giosg_api.get().then((res: any) => {
+    const fetchData = (start_date: string, end_date: string, API_KEY: string) => {
+        instance.defaults.headers.common['Authorization'] = 'Token ' + API_KEY;
+        instance.get(`?start_date=${start_date}&end_date=${end_date}`).then((res: any) => {
             const resData= JSON.parse(JSON.stringify(res.data)) as dataRes
             setData(resData)
         })
@@ -28,5 +29,5 @@ interface props {
 
 type ContextType = {
     data?: dataRes
-    fetchData?: () => void
+    fetchData?: (start_date: string, end_date: string, API_KEY: string) => void
 }
