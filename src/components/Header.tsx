@@ -1,7 +1,12 @@
 import { FormEvent } from "react"
-import React from 'react'
+import React, {useContext, useEffect} from 'react'
+import { DataContext } from '../context/apiDataContext'
 
 const Header = () => {
+    const { fetchData } = useContext(DataContext)
+    useEffect(() => {
+        if(fetchData !== undefined) fetchData()
+    }, [])
     const onSubmit = (event: FormEvent) => {
         event.preventDefault()
     }
