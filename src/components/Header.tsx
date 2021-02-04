@@ -1,16 +1,21 @@
 import { FormEvent } from "react"
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { DataContext } from '../context/apiDataContext'
+import  { useStoredData }  from '../hooks/useStoredData'
 
 const Header = () => {
     const { fetchData } = useContext(DataContext)
-    const [startDate, setStartDate] = useState<string>('2017-05-01')
-    const [endDate, setEndDate] = useState<string>('2017-06-15')
-    const [token, setToken] = useState<string>('38ab33b9f32a3478555d1e06189d50f01a872966')
+    const [startDate, setStartDate] = useStoredData('start_date','')
+    const [endDate, setEndDate] = useStoredData('end_date','')
+    const [token, setToken] = useStoredData('token','')
 
     const onSubmit = (event: FormEvent) => {
         event.preventDefault()
-        if(fetchData !== undefined) fetchData(startDate, endDate, token)
+        if(fetchData !== undefined) fetchData(
+            startDate, 
+            endDate, 
+            token
+        )
     }
 
     return (
@@ -23,7 +28,7 @@ const Header = () => {
                         type="date" 
                         placeholder="yyyy-mm-dd" 
                         min='2017-05-01' 
-                        max='2017-06-15'
+                        max={endDate || '2017-06-15'}
                         value ={startDate}
                         onChange = {(ev) => {
                             const newDate = new Date(ev.target.value)
@@ -35,7 +40,7 @@ const Header = () => {
                         name='end_date' 
                         type="date" 
                         placeholder="yyyy-mm-dd" 
-                        min='2017-05-01' 
+                        min={startDate || '2017-05-01'} 
                         max='2017-06-15'
                         value ={endDate}
                         onChange = {(ev) => {

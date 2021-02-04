@@ -1,7 +1,6 @@
 import { createContext, useState } from 'react'
 import { dataRes} from '../type'
 import instance from '../fetch/giosg_api'
-import axios, { AxiosAdapter } from 'axios'
 
 export const DataContext = createContext<ContextType>({})
 
@@ -15,7 +14,7 @@ export const DataContextProvider =  (props: props) => {
             .then((res: any) => {
                 const resData= JSON.parse(JSON.stringify(res.data)) as dataRes
                 setData(resData)
-            }).catch((err: AxiosAdapter) => {
+            }).catch((err: Error) => {
                 console.log(err)
             })
     }
