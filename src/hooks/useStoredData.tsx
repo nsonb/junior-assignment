@@ -5,11 +5,11 @@ export const useStoredData = (type: string, defaultValue?: string) => {
         data: string,
         setCurrentData: (value: string) => void
     ]
-    const [date, setDate] = useState<string>(defaultValue || '')
+    const [data, setData] = useState<string>(defaultValue || '')
 
     useEffect (() => {
         try {
-            setDate(window.localStorage.getItem(type) || '' )
+            setData(window.localStorage.getItem(type) || '' )
         } catch(err) {
             console.log(err)
         }
@@ -18,18 +18,18 @@ export const useStoredData = (type: string, defaultValue?: string) => {
 
     useEffect(() => {
         try {
-            window.localStorage.setItem(type, date)
+            window.localStorage.setItem(type, data)
         } catch(err) {
             console.log(err)
         }
         
-    }, [date])
+    }, [data])
 
-    const setCurrentDate = (value: string) =>{
-        setDate(value)
+    const setCurrentData = (value: string) =>{
+        setData(value)
     }
 
-    const returned: useStoredDataRes = [date, setCurrentDate]
+    const returned: useStoredDataRes = [data, setCurrentData]
 
     return returned
 }
