@@ -49,8 +49,7 @@ const Header = () => {
                     name='token'
                     value ={token}
                         onChange = {(ev) => {
-                            const newDate = new Date(ev.target.value)
-                            setToken(newDate.toISOString().split("T")[0])
+                            setToken(ev.target.value)
                         }}
                 />
                 <button className='hover'>Submit</button>
