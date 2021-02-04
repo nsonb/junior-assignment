@@ -1,5 +1,5 @@
 import { FormEvent } from "react"
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { DataContext } from '../context/apiDataContext'
 import  { useStoredData }  from '../hooks/useStoredData'
 
@@ -9,13 +9,19 @@ const Header = () => {
     const [endDate, setEndDate] = useStoredData('end_date','')
     const [token, setToken] = useStoredData('token','')
 
-    const onSubmit = (event: FormEvent) => {
-        event.preventDefault()
+    const getData = () => {
         if(fetchData !== undefined) fetchData(
             startDate, 
             endDate, 
             token
         )
+    }
+
+    useEffect(getData, [startDate, token, endDate])
+    
+    const onSubmit = (event: FormEvent) => {
+        event.preventDefault()
+        getData()
     }
 
     return (
@@ -35,6 +41,8 @@ const Header = () => {
                             setStartDate(newDate.toISOString().split("T")[0])
                         }}
                     />
+                </div>
+                <div>
                     <label>End Date</label>
                     <input 
                         name='end_date' 
@@ -49,15 +57,17 @@ const Header = () => {
                         }}
                     />
                 </div>
-                <label>Token</label>
-                <input 
-                    name='token'
-                    value ={token}
-                        onChange = {(ev) => {
-                            setToken(ev.target.value)
-                        }}
-                />
-                <button className='hover'>Submit</button>
+                    
+                <div>
+                    <label>Token</label>
+                    <input 
+                        name='token'
+                        value ={token}
+                            onChange = {(ev) => {
+                                setToken(ev.target.value)
+                            }}
+                    />
+                </div>
             </form>
         </div>
     )
