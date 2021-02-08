@@ -79,7 +79,8 @@ const SearchBar = () => {
 const style: React.CSSProperties = {
     display: 'flex',
     height: '16%',
-    marginTop: '0.5rem'
+    marginTop: '0.3rem',
+    marginBottom: '0.6rem'
 }
 
 const inputSegment: React.CSSProperties = {
