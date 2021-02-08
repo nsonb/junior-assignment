@@ -3,15 +3,16 @@ import { useContext } from 'react'
 import BoxDisplay from './BoxDisplay'
 import Table from './Table'
 
-const Body = () => {
+const Result = () => {
     const { data } = useContext(DataContext)
     console.log(data)
 
     const boxContainer: React.CSSProperties = {
-        width: '96%',
+        width: '80%',
         display: 'flex',
-        flexDirection: 'column',
-        margin: '2%'
+        flexDirection: 'row',
+        margin: '5% auto',
+        maxWidth: '640px'
     }
 
     return (
@@ -27,4 +28,4 @@ const Body = () => {
     )
 }
 
-export default Body
+export default Result

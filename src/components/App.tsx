@@ -1,5 +1,5 @@
 import SearchBar from './SearchBar'
-import Body from './Body'
+import Result from './Result'
 import {DataContextProvider} from '../context/apiDataContext'
 
 const App = () => {
@@ -8,7 +8,7 @@ const App = () => {
     <div className="App">
       <DataContextProvider>
         <SearchBar/>
-        <Body/>
+        <Result/>
       </DataContextProvider>
     </div>
   );
