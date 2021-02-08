@@ -1,4 +1,4 @@
-import Header from './Header'
+import SearchBar from './SearchBar'
 import Body from './Body'
 import {DataContextProvider} from '../context/apiDataContext'
 
@@ -7,7 +7,7 @@ const App = () => {
   return (
     <div className="App">
       <DataContextProvider>
-        <Header/>
+        <SearchBar/>
         <Body/>
       </DataContextProvider>
     </div>
