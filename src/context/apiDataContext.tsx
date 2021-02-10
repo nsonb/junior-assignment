@@ -10,7 +10,6 @@ export const DataContextProvider =  (props: props) => {
     const fetchData = (start_date: string, end_date: string, API_KEY: string) => {
         if(start_date !== '' && end_date !== '' && API_KEY !== '') {
             instance.defaults.headers.common['Authorization'] = 'Token ' + API_KEY;
-            console.log(start_date)
             instance
                 .get(`?start_date=${start_date}&end_date=${end_date}`)
                 .then((res: any) => {

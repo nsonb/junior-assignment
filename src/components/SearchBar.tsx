@@ -59,7 +59,6 @@ const SearchBar = () => {
                         }}
                     />
                 </div>
-                    
                 <div style={inputSegment}>
                     <label style={label}>Token</label>
                     <input 

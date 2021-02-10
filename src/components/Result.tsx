@@ -23,7 +23,7 @@ const Result = () => {
                 <BoxDisplay number={data?.total_visitor_message_count.toString() || ''} title='total visitor message count'/>
             </div>
             
-            <Table list = {data?.by_date}/>
+            <Table list = {data?.by_date} displayNumber={5}/>
         </div>
     )
 }

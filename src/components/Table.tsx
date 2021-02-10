@@ -1,19 +1,35 @@
-import {datum} from '../type'
+import { datum } from '../type'
 import Row from './Row'
+import Paginate from './Paginate'
+import { useEffect, useState } from 'react'
 
-const Table = (props: {list?: datum[]}) => {
-    const { list } = props
-    let paginate = true
+const Table = (props: {list?: datum[], displayNumber: number}) => {
+    const { list, displayNumber } = props
+    const [ startPoint, setStartPoint] = useState<number>(0)
+    const [ displayedList, setDisplayedList ] = useState<datum[]>()
 
-    if(list && list.length < 5) {
-        paginate = false
-    } else {
-        
+    useEffect(() => {
+        let tempList: datum[] = []
+        for(let i=startPoint; i<startPoint+displayNumber;i++) {
+            if(list) tempList.push(list[i])
+        }
+        setDisplayedList(tempList)
+    }, [list, startPoint])
+
+    const renderPaginate = () => {
+        if(list === undefined) {return <div></div>}
+        if(list.length < displayNumber) {
+            return <div></div>
+        } else {
+            const dsplayedPage = list.length % displayNumber === 0 ? Number((list.length / displayNumber).toFixed(0)) : Math.floor((list.length / displayNumber)) +1
+            return <Paginate dsplayedPage = {dsplayedPage} setStartPoint = {setStartPoint}/>
+        }
     }
 
-    const renderList = list?.map((i: datum, index) => {
-        return <Row bold= {false} elements = {[i.date.toString(), i.conversation_count, i.missed_chat_count, i.visitors_with_conversation_count]} key={i.date.toString()+'..'+index}/>
+    const renderList = displayedList?.map((i: datum, index) => {
         
+        if(!i) return null
+        return <Row bold= {false} elements = {[i.date.toString(), i.conversation_count, i.missed_chat_count, i.visitors_with_conversation_count]} key={i.date.toString()+'..'+index}/>
     })
 
     const style: React.CSSProperties = {
@@ -28,7 +44,7 @@ const Table = (props: {list?: datum[]}) => {
             <div style={{marginTop: '0.5rem', marginBottom: '0.2rem'}}>
                 {renderList}
             </div>
-            {paginate === true? <div>paginate is a must</div> : null}
+            {renderPaginate()}
         </div>
     )
 }
