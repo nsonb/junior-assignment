@@ -18,3 +18,9 @@ code {
   background-color: beige;
   font-weight: bold;
 }
+
+.disable {
+  background-color: whitesmoke;
+  color: aliceblue;
+  outline: none;
+}

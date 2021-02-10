@@ -27,7 +27,6 @@ const Table = (props: {list?: datum[], displayNumber: number}) => {
     }
 
     const renderList = displayedList?.map((i: datum, index) => {
-        
         if(!i) return null
         return <Row bold= {false} elements = {[i.date.toString(), i.conversation_count, i.missed_chat_count, i.visitors_with_conversation_count]} key={i.date.toString()+'..'+index}/>
     })

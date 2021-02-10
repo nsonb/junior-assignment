@@ -26,9 +26,27 @@ const Paginate = (props: {dsplayedPage: number, setStartPoint: Dispatch<SetState
     
     return (
         <div style={{display:'flex', flexDirection: 'row', margin: 'auto', marginTop: '0.5rem', width: 'fit-content'}}>
-            <button style={buttonStyle} className='hover'>{'<'}</button>
+            <button 
+                style={buttonStyle} 
+                className={currentChosen === 0 ? 'disable' :'hover' }
+                onClick={() => {
+                    if(currentChosen !== 0) {
+                        let t = currentChosen-1;
+                        props.setStartPoint(t*5)
+                        setCurrentChosen(t)
+                    }
+                }}>{'<'}</button>
             {renderedButton}
-            <button style={buttonStyle} className='hover'>{'>'}</button>
+            <button 
+                style={buttonStyle} 
+                className={currentChosen === props.dsplayedPage - 1 ? 'disable' :'hover' }
+                onClick={() => {
+                    if(currentChosen !== props.dsplayedPage - 1) {
+                        let t = currentChosen+1;
+                        props.setStartPoint(t*5)
+                        setCurrentChosen(t)
+                    }
+                }}>{'>'}</button>
         </div>
     )
 }

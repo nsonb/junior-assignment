@@ -88,7 +88,7 @@ const inputSegment: React.CSSProperties = {
     margin: 'auto',
     marginTop: '0.5rem',
     width: '90%',
-    maxWidth: '640px'
+    maxWidth: '800px'
 }
 
 const input: React.CSSProperties = {

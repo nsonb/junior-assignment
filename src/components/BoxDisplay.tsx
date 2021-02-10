@@ -1,10 +1,8 @@
 const BoxDisplay = (props: {number: string, title: string}) => {
     const container: React.CSSProperties = {
-        width: '80%',
-        margin: 'auto',
+        width: '90%',
         marginBottom: '0.5rem',
-        maxWidth: '12rem',
-        height: '6rem',
+        height: '8rem',
         border: 'solid grey 1px',
         borderRadius: '0.2rem'
     }
@@ -12,7 +10,8 @@ const BoxDisplay = (props: {number: string, title: string}) => {
     const ttle: React.CSSProperties = {
         textAlign: 'center',
         fontFamily: 'Courier',
-        marginTop: '0.2rem'
+        marginTop: '0.2rem',
+        height: '3.5rem'
     }
 
     const nmber: React.CSSProperties = {
