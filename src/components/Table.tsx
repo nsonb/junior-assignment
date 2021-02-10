@@ -14,7 +14,7 @@ const Table = (props: {list?: datum[], displayNumber: number}) => {
             if(list) tempList.push(list[i])
         }
         setDisplayedList(tempList)
-    }, [list, startPoint])
+    }, [list, startPoint, displayNumber])
 
     const renderPaginate = () => {
         if(list === undefined) {return <div></div>}

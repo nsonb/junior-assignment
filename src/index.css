@@ -13,6 +13,8 @@ code {
     monospace;
 }
 
-.hover {
+.hover:hover {
   cursor: pointer;
+  background-color: beige;
+  font-weight: bold;
 }
