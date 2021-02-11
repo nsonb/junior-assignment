@@ -68,7 +68,9 @@ const currentButtonStyle: React.CSSProperties = {
     width: '2rem',
     height: '2rem',
     marginRight: '0.2rem',
-    borderRadius: '0.3rem'
+    borderRadius: '0.3rem',
+    backgroundColor: 'beige',
+    color: 'darkred'
 }
 
 export default Paginate

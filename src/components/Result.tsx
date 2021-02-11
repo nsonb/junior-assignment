@@ -17,7 +17,7 @@ const Result = () => {
         alignContent: 'center',
         alignItems: 'center',
         justifyContent: 'space-between',
-        margin: '3rem auto',
+        margin: '2rem auto',
         maxWidth: '800px'
     }
 

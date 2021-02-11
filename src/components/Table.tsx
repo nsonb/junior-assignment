@@ -1,12 +1,17 @@
 import { datum } from '../type'
+import { useEffect, useState, useRef } from 'react'
+import { useContainerDimensions, refElement } from '../hooks/useContainerDimensions'
 import Row from './Row'
 import Paginate from './Paginate'
-import { useEffect, useState } from 'react'
+import MobileRow from './MobileRow'
 
 const Table = (props: {list?: datum[], displayNumber: number}) => {
     const { list, displayNumber } = props
     const [ startPoint, setStartPoint] = useState<number>(0)
     const [ displayedList, setDisplayedList ] = useState<datum[]>()
+
+    const myRef = useRef<HTMLDivElement>(null)
+    const { width } = useContainerDimensions(myRef as unknown as refElement)
 
     useEffect(() => {
         let tempList: datum[] = []
@@ -28,7 +33,12 @@ const Table = (props: {list?: datum[], displayNumber: number}) => {
 
     const renderList = displayedList?.map((i: datum, index) => {
         if(!i) return null
-        return <Row bold= {false} elements = {[i.date.toString(), i.conversation_count, i.missed_chat_count, i.visitors_with_conversation_count]} key={i.date.toString()+'..'+index}/>
+        return width < 380 ? 
+            <MobileRow 
+                key={i.date.toString()+'..'+index} 
+                elements = {[i.date.toString(), i.conversation_count, i.missed_chat_count, i.visitors_with_conversation_count]}
+                values={['Date', 'Conversation Count', 'Missed Chat Count', 'Visitors with conversation count']}/> 
+            :<Row bold= {false} elements = {[i.date.toString(), i.conversation_count, i.missed_chat_count, i.visitors_with_conversation_count]} key={i.date.toString()+'..'+index}/>
     })
 
     const style: React.CSSProperties = {
@@ -37,10 +47,17 @@ const Table = (props: {list?: datum[], displayNumber: number}) => {
         margin: 'auto'
     }
 
+    const desktopStyle: React.CSSProperties = {
+        marginTop: '0.5rem', 
+        marginBottom: '0.2rem', 
+        height: width<380 ? 'fit-content' :(displayNumber*2).toString()+'rem'  
+    }
+
     return (
-        <div style ={style}>
-            <Row elements={['Date', 'Conversation Count', 'Missed Chat Count', 'Visitors with conversation count']} bold = {true}/>
-            <div style={{marginTop: '0.5rem', marginBottom: '0.2rem'}}>
+        <div style ={style} ref={myRef}>
+            {width < 380? null : <Row elements={['Date', 'Conversation Count', 'Missed Chat Count', 'Visitors with conversation count']} bold = {true}/>}
+            
+            <div style={desktopStyle}>
                 {renderList}
             </div>
             {renderPaginate()}

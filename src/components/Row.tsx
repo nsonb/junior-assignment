@@ -2,15 +2,17 @@ const Row = (props:{elements: (string | number)[], bold: boolean}) => {
     const style: React.CSSProperties = {
         display: 'flex',
         width: '100%',
+        height: props.bold? 'fit-content': '2rem',
         fontSize: 'smaller',
         fontFamily: 'Courier',
         fontWeight: props.bold? 'bold': 'normal',
-        marginBottom: '0.2rem'
+        marginBottom: '0.2rem',
+        marginTop: '0.2rem'
     }
 
     const firstRowElement: React.CSSProperties = {
         width: '15%',
-        textAlign: 'left',
+        textAlign: 'center',
     }
 
     const rowElement: React.CSSProperties = {

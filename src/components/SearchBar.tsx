@@ -64,6 +64,7 @@ const SearchBar = () => {
                     <input 
                         style={input}
                         name='token'
+                        placeholder ='Access Token'
                         value ={token}
                             onChange = {(ev) => {
                                 setToken(ev.target.value)
