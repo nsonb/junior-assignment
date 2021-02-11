@@ -6,6 +6,14 @@ const MobileRow = (props: {elements: (string | number)[], values: (string | numb
         fontFamily: 'Courier'
     }
 
+    const firstStyle: React.CSSProperties = {
+        display: 'flex',
+        flexDirection: 'row',
+        marginBottom: '0.1rem',
+        fontFamily: 'Courier',
+        backgroundColor: 'beige'
+    }
+
     const valueStyle: React.CSSProperties = {
         width: '60%',
         marginLeft: '5%'
@@ -17,7 +25,7 @@ const MobileRow = (props: {elements: (string | number)[], values: (string | numb
     }
     const renderList = props.values.map((e: (string|number), index) => {
         return (
-            <div key={e} style={style}>
+            <div key={e} style={index !== 0 ? style : firstStyle}>
                 <div style={valueStyle}>{e}</div>
                 <div style={elementStyle}>{props.elements[index]}</div>
             </div>

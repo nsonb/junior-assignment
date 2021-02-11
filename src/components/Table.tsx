@@ -38,7 +38,10 @@ const Table = (props: {list?: datum[], displayNumber: number}) => {
                 key={i.date.toString()+'..'+index} 
                 elements = {[i.date.toString(), i.conversation_count, i.missed_chat_count, i.visitors_with_conversation_count]}
                 values={['Date', 'Conversation Count', 'Missed Chat Count', 'Visitors with conversation count']}/> 
-            :<Row bold= {false} elements = {[i.date.toString(), i.conversation_count, i.missed_chat_count, i.visitors_with_conversation_count]} key={i.date.toString()+'..'+index}/>
+            :<Row
+                key={i.date.toString()+'..'+index}
+                bold= {false} 
+                elements = {[i.date.toString(), i.conversation_count, i.missed_chat_count, i.visitors_with_conversation_count]} />
     })
 
     const style: React.CSSProperties = {
