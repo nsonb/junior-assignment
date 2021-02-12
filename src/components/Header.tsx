@@ -1,6 +1,6 @@
 const Header = () => {
     return (
-        <div style = {{height: '1rem'}}>
+        <div style = {{height: '0.2rem'}}>
 
         </div>
     )
