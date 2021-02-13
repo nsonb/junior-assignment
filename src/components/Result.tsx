@@ -18,9 +18,11 @@ const Result = () => {
         alignContent: 'center',
         alignItems: 'center',
         justifyContent: 'space-between',
-        margin: '2rem auto',
+        margin: '2rem auto 1rem',
         maxWidth: '800px'
     }
+
+    if(data === undefined) return <div style = {boxContainer}>No data</div>
 
     return (
         <div ref={myRef}>

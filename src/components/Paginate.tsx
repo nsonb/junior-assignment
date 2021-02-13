@@ -23,9 +23,11 @@ const Paginate = (props: {dsplayedPage: number, setStartPoint: Dispatch<SetState
         }
         setRendererButton(buttons)
     }, [props.dsplayedPage, currentChosen, props])
-    
+
+    if(props.dsplayedPage === 1) return <div style={pageOf}>Page 1 of {props.dsplayedPage}</div>
     return (
         <div style={{display:'flex', flexDirection: 'row', margin: 'auto', marginTop: '0.5rem', width: 'fit-content'}}>
+            
             <button 
                 style={buttonStyle} 
                 className={currentChosen === 0 ? 'disable' :'hover' }
@@ -71,6 +73,12 @@ const currentButtonStyle: React.CSSProperties = {
     borderRadius: '0.3rem',
     backgroundColor: 'beige',
     color: 'darkred'
+}
+
+const pageOf: React.CSSProperties = {
+    fontFamily: 'Courier',
+    margin: 'auto',
+    textAlign: 'center'
 }
 
 export default Paginate
