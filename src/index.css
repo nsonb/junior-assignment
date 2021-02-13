@@ -24,3 +24,8 @@ code {
   color: white;
   outline: none;
 }
+
+.fit-content{
+  width: fit-content;
+  width: -moz-fit-content;
+}

@@ -26,7 +26,7 @@ const Paginate = (props: {dsplayedPage: number, setStartPoint: Dispatch<SetState
 
     if(props.dsplayedPage === 1) return <div style={pageOf}>Page 1 of {props.dsplayedPage}</div>
     return (
-        <div style={{display:'flex', flexDirection: 'row', margin: 'auto', marginTop: '0.5rem', width: 'fit-content'}}>
+        <div style={{display:'flex', flexDirection: 'row', margin: 'auto', marginTop: '0.5rem'}} className='fit-content'>
             
             <button 
                 style={buttonStyle} 

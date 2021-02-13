@@ -11,6 +11,7 @@ const Row = (props:{elements: (string | number)[], bold: boolean}) => {
     }
 
     const firstRowElement: React.CSSProperties = {
+        marginLeft: '3%',
         width: '15%',
         textAlign: 'center',
     }

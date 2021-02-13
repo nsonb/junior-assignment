@@ -26,8 +26,12 @@ const Graph = (props: {data?: datum[]}) => {
 
     return (
         <div ref={myRef} style={style}>
+            <div>Data Visualization</div>
             <VictoryChart 
-                domainPadding={0} theme={VictoryTheme.material} width={width} height={height*0.9} maxDomain={{ y: 18 }}
+                domainPadding={0} 
+                theme={VictoryTheme.material} 
+                width={width} height={height*0.9} 
+                maxDomain={{ y: 18 }}
                 containerComponent={<VictoryVoronoiContainer/>}
             >
                 <VictoryGroup

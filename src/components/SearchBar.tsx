@@ -95,7 +95,8 @@ const inputSegment: React.CSSProperties = {
 const input: React.CSSProperties = {
     borderRadius: '0.2rem',
     border: '1px solid grey',
-    height: '1.4rem'
+    height: '1.4rem',
+    fontFamily: 'Courier'
 }
 
 const label: React.CSSProperties = {
