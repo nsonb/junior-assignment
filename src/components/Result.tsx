@@ -31,6 +31,7 @@ const Result = () => {
                 <BoxDisplay number={data?.total_user_message_count.toString() || ''} title='total user message count'/>
                 <BoxDisplay number={data?.total_visitor_message_count.toString() || ''} title='total visitor message count'/>
             </div>
+            <div style={{fontFamily: 'Courier', margin: 'auto', width: '80%', maxWidth: '800px', minWidth: '320px'}}>Data Visualization</div>
             <Graph data = {data?.by_date}/>
             
             <Table list = {data?.by_date} displayNumber={5}/>

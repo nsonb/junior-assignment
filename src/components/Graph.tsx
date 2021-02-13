@@ -1,7 +1,8 @@
-import { datum } from "../type"
+import { datapoint, datum } from "../type"
 import { VictoryLine, VictoryChart, VictoryVoronoiContainer, VictoryTheme, VictoryTooltip, VictoryGroup, VictoryScatter } from 'victory';
 import React, { useEffect, useRef, useState } from "react";
 import { useContainerDimensions, refElement} from '../hooks/useContainerDimensions'
+import CustomVictoryGroup from "./CustomVictoryGroup";
 
 const Graph = (props: {data?: datum[]}) => {
 
@@ -19,106 +20,118 @@ const Graph = (props: {data?: datum[]}) => {
         width: '80%', 
         minWidth: '320px', 
         fontFamily: 'Courier', 
-        height: props.data === undefined ? '2rem' : '28rem'
+        height: props.data === undefined ? '2rem' : '30rem',
+        overflowX: 'scroll'
+    }
+
+    const renderedDate = (index: number, d: Date, length?: number) => {
+        const day = d.toString().split('-')[2]
+        const month = d.toString().split('-')[1]
+        const year = d.toString().split('-')[0]
+        if(index === 0) return day+'-'+month+'\n'+year
+        if(length && index=== length-1) return day+'-'+month+'\n'+year
+        return day
     }
 
     if(props.data === undefined) return (<div style= {style}>No data</div>)
 
     return (
-        <div ref={myRef} style={style}>
-            <div>Data Visualization</div>
-            <VictoryChart 
-                domainPadding={0} 
-                theme={VictoryTheme.material} 
-                width={width} height={height*0.9} 
-                maxDomain={{ y: 18 }}
-                containerComponent={<VictoryVoronoiContainer/>}
-            >
-                <VictoryGroup
-                    data={props.data?.map((e) => {
-                        const dataSet = {y: e.conversation_count, x: e.date.toString().replaceAll('-', '.')}
-                        return dataSet
-                    })}
-                    color = 'black'
-                    animate={{
-                        duration: 500,
-                        onLoad: { duration: 500 }
-                    }}
-                    labels={({ datum }) => `Conversation Count:\n${datum.x}: ${datum.y}`}
-                    labelComponent={
-                        <VictoryTooltip
-                            style={{ fontSize: 10 }}
-                        />
-                    }
+        <div style={style}>
+            <div ref={myRef} style={{height: '28rem', width: '800px'}}>
+                <VictoryChart 
+                    domainPadding={0} 
+                    theme={VictoryTheme.material} 
+                    width={width} height={height*0.9} 
+                    maxDomain={{ y: 18 }}
+                    containerComponent={<VictoryVoronoiContainer/>}
                 >
-                    <VictoryLine
-                        style={{
-                            data: {
-                            strokeWidth: ({ active }) => active ? 2 : 1
-                            },
-                            labels: { fill: "black" }
+                    <VictoryGroup
+                        data={props.data?.map((e, index) => {
+                            const dataSet = {y: e.conversation_count, x: renderedDate(index, e.date, props.data?.length)}
+                            return dataSet
+                        })}
+                        color = 'black'
+                        animate={{
+                            duration: 500,
+                            onLoad: { duration: 500 }
                         }}
-                        interpolation="linear"
-                    />
-                    <VictoryScatter size={({ active }) => active ? 3 : 1}/>
-                </VictoryGroup>
-                <VictoryGroup
-                    data={props.data?.map((e) => {
-                        const dataSet = {y: e.missed_chat_count, x: e.date.toString().replaceAll('-', '.')}
-                        return dataSet
-                    })}
-                    color = 'Orange'
-                    animate={{
-                        duration: 500,
-                        onLoad: { duration: 500 }
-                    }}
-                    labels={({ datum }) => `Missed Chat Count:\n${datum.x}: ${datum.y}`}
-                    labelComponent={
-                        <VictoryTooltip
-                            style={{ fontSize: 10 }}
+                        labels={({ datum }) => `Conversation Count:\n${datum.x}: ${datum.y}`}
+                        labelComponent={
+                            <VictoryTooltip
+                                style={{ fontSize: 10 }}
+                            />
+                        }
+                    >
+                        <VictoryLine
+                            style={{
+                                data: {
+                                strokeWidth: ({ active }) => active ? 2 : 1
+                                },
+                                labels: { fill: "black" }
+                            }}
+                            interpolation="linear"
                         />
-                    }
-                >
-                    <VictoryLine
-                        style={{
-                            data: {
-                            strokeWidth: ({ active }) => active ? 2 : 1
-                            },
-                            labels: { fill: "Orange" }
+                        <VictoryScatter size={({ active }) => active ? 3 : 1}/>
+                    </VictoryGroup>
+                    <VictoryGroup
+                        data={props.data?.map((e, index) => {
+                            const dataSet = {y: e.missed_chat_count, x: renderedDate(index, e.date, props.data?.length, )}
+                            return dataSet
+                        })}
+                        color = 'Orange'
+                        animate={{
+                            duration: 500,
+                            onLoad: { duration: 500 }
                         }}
-                    />
-                    <VictoryScatter size={({ active }) => active ? 3 : 1}/>
-                </VictoryGroup>
-                <VictoryGroup
-                    data={props.data?.map((e) => {
-                        const dataSet = {y: e.visitors_with_conversation_count, x: e.date.toString().replaceAll('-', '.')}
-                        return dataSet
-                    })}
-                    color = 'CadetBlue'
-                    animate={{
-                        duration: 500,
-                        onLoad: { duration: 500 }
-                    }}
-                    labels={({ datum }) => `Visitors With Conversation Count:\n${datum.x}: ${datum.y}`}
-                    labelComponent={
-                        <VictoryTooltip
-                            style={{ fontSize: 10 }}
+                        labels={({ datum }) => `Missed Chat Count:\n${datum.x}: ${datum.y}`}
+                        labelComponent={
+                            <VictoryTooltip
+                                style={{ fontSize: 10 }}
+                            />
+                        }
+                    >
+                        <VictoryLine
+                            style={{
+                                data: {
+                                strokeWidth: ({ active }) => active ? 2 : 1
+                                },
+                                labels: { fill: "Orange" }
+                            }}
                         />
-                    }
-                    
-                >
-                    <VictoryLine
-                        style={{
-                            data: {
-                            strokeWidth: ({ active }) => active ? 2 : 1
-                            },
-                            labels: { fill: "CadetBlue" }
+                        <VictoryScatter size={({ active }) => active ? 3 : 1}/>
+                    </VictoryGroup>
+                    <VictoryGroup
+                        data={props.data?.map((e, index) => {
+                            const dataSet = {y: e.visitors_with_conversation_count, x: renderedDate( index, e.date, props.data?.length)}
+                            return dataSet
+                        })}
+                        color = 'CadetBlue'
+                        animate={{
+                            duration: 500,
+                            onLoad: { duration: 500 }
                         }}
-                        interpolation="linear"
-                    />
-                    <VictoryScatter size={({ active }) => active ? 3 : 1}/>
-                </VictoryGroup>
-            </VictoryChart>
+                        labels={({ datum }) => `Visitors With Conversation Count:\n${datum.x}: ${datum.y}`}
+                        labelComponent={
+                            <VictoryTooltip
+                                style={{ fontSize: 10 }}
+                            />
+                        }
+                        
+                    >
+                        <VictoryLine
+                            style={{
+                                data: {
+                                strokeWidth: ({ active }) => active ? 2 : 1
+                                },
+                                labels: { fill: "CadetBlue" }
+                            }}
+                            interpolation="linear"
+                        />
+                        <VictoryScatter size={({ active }) => active ? 3 : 1}/>
+                    </VictoryGroup>
+                </VictoryChart>
+            </div>
+            
         </div>
     )
 }

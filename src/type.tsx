@@ -31,3 +31,8 @@ export interface dataRes {
     total_visitors_with_conversation_count: number
 }
 
+export interface datapoint {
+    x: string|number,
+    y: string|number
+}
+
