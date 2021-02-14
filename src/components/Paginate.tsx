@@ -1,5 +1,8 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 
+// the component takes in the dsplayedPage and setStartPoint to render out a pagination segment for the table
+// dsplayedPage is the already calculated number of pages passed down from the parent component
+// setStartPoint is the function that sets the current displayed page in the parent component
 const Paginate = (props: {dsplayedPage: number, setStartPoint: Dispatch<SetStateAction<number>>}) => {
     const [renderedButton, setRendererButton] = useState<JSX.Element[]>()
     const [currentChosen, setCurrentChosen] = useState(0)
@@ -13,7 +16,8 @@ const Paginate = (props: {dsplayedPage: number, setStartPoint: Dispatch<SetState
                     style={i === currentChosen ? currentButtonStyle : buttonStyle} 
                     className='hover' 
                     onClick={() => {
-                        console.log(i);
+                        // when the number button is clicked, the user is taken to the corresponding numbered page
+                        // and the style for the button is changed to notify the users which page they are on
                         setCurrentChosen(i)
                         props.setStartPoint(i*5)
                 }}>
@@ -24,15 +28,18 @@ const Paginate = (props: {dsplayedPage: number, setStartPoint: Dispatch<SetState
         setRendererButton(buttons)
     }, [props.dsplayedPage, currentChosen, props])
 
+    // if there is only one page, this component will send displaying page 1 of 1 instead
     if(props.dsplayedPage === 1) return <div style={pageOf}>Page 1 of {props.dsplayedPage}</div>
+
     return (
         <div style={{display:'flex', flexDirection: 'row', margin: 'auto', marginTop: '0.5rem'}} className='fit-content'>
-            
             <button 
                 style={buttonStyle} 
                 className={currentChosen === 0 ? 'disable' :'hover' }
                 onClick={() => {
                     if(currentChosen !== 0) {
+                        // when the button is pressed, the user is taken back one page.
+                        // the button is disable when the current displayed button is at index 0 (button 1)
                         let t = currentChosen-1;
                         props.setStartPoint(t*5)
                         setCurrentChosen(t)
@@ -44,6 +51,8 @@ const Paginate = (props: {dsplayedPage: number, setStartPoint: Dispatch<SetState
                 className={currentChosen === props.dsplayedPage - 1 ? 'disable' :'hover' }
                 onClick={() => {
                     if(currentChosen !== props.dsplayedPage - 1) {
+                        // when the button is pressed, the user is taken to the next page.
+                        // the button is disable when the current displayed button is at maximum index (highes button number)
                         let t = currentChosen+1;
                         props.setStartPoint(t*5)
                         setCurrentChosen(t)
@@ -53,6 +62,7 @@ const Paginate = (props: {dsplayedPage: number, setStartPoint: Dispatch<SetState
     )
 }
 
+// styling
 const buttonStyle: React.CSSProperties = {
     fontFamily: 'Courier',
     fontWeight: 'lighter',

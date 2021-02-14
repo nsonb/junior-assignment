@@ -1,5 +1,6 @@
 import SearchBar from './SearchBar'
-import {DataContextProvider} from '../context/apiDataContext'
+// this application uses Context to provide cross-component data.
+import { DataContextProvider } from '../context/apiDataContext'
 
 import Result from './Result'
 import Footer from './Footer'

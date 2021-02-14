@@ -1,15 +1,17 @@
-import { datapoint, datum } from "../type"
+import {  datum } from "../type"
+// the component uses victory to render the graph elements. Link: https://formidable.com/open-source/victory/
 import { VictoryLine, VictoryChart, VictoryVoronoiContainer, VictoryTheme, VictoryTooltip, VictoryGroup, VictoryScatter } from 'victory';
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useContainerDimensions, refElement} from '../hooks/useContainerDimensions'
-import CustomVictoryGroup from "./CustomVictoryGroup";
 
+// Component for displaying graph
 const Graph = (props: {data?: datum[]}) => {
 
     const myRef = useRef<HTMLDivElement>(null)
     const { width, height } = useContainerDimensions(myRef as unknown as refElement)
-    const [currentDsplay, setCurrentDsplay] = useState('all')
+    //const [currentDsplay, setCurrentDsplay] = useState('all')
 
+    // updating the graph when new data is provided or data is changed
     useEffect(()=>{
         console.log(props.data)
     }, [props.data, myRef])
@@ -24,6 +26,7 @@ const Graph = (props: {data?: datum[]}) => {
         overflowX: 'scroll'
     }
 
+    // a small function to optimize the displays of dates on the graph
     const renderedDate = (index: number, d: Date, length?: number) => {
         const day = d.toString().split('-')[2]
         const month = d.toString().split('-')[1]
@@ -32,7 +35,8 @@ const Graph = (props: {data?: datum[]}) => {
         if(length && index=== length-1) return day+'-'+month+'\n'+year
         return day
     }
-
+    // if no data is provided, the graph component renders out a notification instead of an empty graph
+    // also a layer of protection for typescript typechecking
     if(props.data === undefined) return (<div style= {style}>No data</div>)
 
     return (

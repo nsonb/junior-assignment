@@ -1,5 +1,6 @@
 import {useStoredData} from '../hooks/useStoredData'
-
+// test that check the various functions of the useStoredData during the design and building the useStoredData custom hooks
+// test names are self-explanatory
 test('get init data', () => {
     () => {
         const [testDate, setTestDate] = useStoredData('testDate', 'init_test_date')

@@ -1,3 +1,5 @@
+// customised interface for use with typescript checking and data fetching from the server
+
 export interface datum {
     chats_from_autosuggest_count: number,
     chats_from_user_count: number,

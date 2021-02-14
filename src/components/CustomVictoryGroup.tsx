@@ -2,6 +2,8 @@ import { useEffect } from "react"
 import { VictoryGroup, VictoryTooltip, VictoryLine, VictoryScatter } from "victory"
 import { datapoint } from '../type'
 
+// custom Victory group for easier adoption and drawing graph from Victory. Does not work at the moment
+// due to VictoryChart not regconizing imported Victory component
 const CustomVictoryGroup = (props: {data: datapoint[], title: string, color: string}) => {
     useEffect(() => {
         console.log('???')

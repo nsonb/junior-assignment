@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 
+// custom type that extends HTMLDivElement to be used with the custom hooks and typescript
 export interface refElement extends HTMLDivElement {
     current?:  {
         offsetWidth: number
         offsetHeight: number
     }
 }
-
+// custom hooks that provide the size the referenced jsx component
 export const useContainerDimensions = (myRef : refElement) => {
     const getDimensions = () => ({
       width: myRef?.current?.offsetWidth || 0,

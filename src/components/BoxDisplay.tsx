@@ -1,3 +1,5 @@
+// the big box component for the 3 number elements
+
 const BoxDisplay = (props: {number: string, title: string}) => {
     const container: React.CSSProperties = {
         width: '90%',
@@ -19,6 +21,7 @@ const BoxDisplay = (props: {number: string, title: string}) => {
         textAlign: 'center',
         fontFamily: 'Courier'
     }
+
     return (
         <div style={container}>
             <div style={ttle}>{props.title}</div>

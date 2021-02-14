@@ -5,6 +5,8 @@ import  { useStoredData }  from '../hooks/useStoredData'
 
 const SearchBar = () => {
     const { fetchData } = useContext(DataContext)
+    // this component uses the custom hook useStoredData to store user input into localStorage and
+    // fetch it on startup
     const [startDate, setStartDate] = useStoredData('start_date','')
     const [endDate, setEndDate] = useStoredData('end_date','')
     const [token, setToken] = useStoredData('token','')
@@ -17,13 +19,22 @@ const SearchBar = () => {
         )
     }
 
-    useEffect(getData, [startDate, token, endDate])
+    // the component fetches data whenever there is a change in the date or tokens
+    // the useEffect uses a timeout to cancel the api request if the user puts in a new input within 1s
+    // i.e. the api request is only fired after the user has stopped typing for more than 1s
+    useEffect(() => {
+        const timeOut = setTimeout(() => {getData()}, 1000)
+        return () => {clearTimeout(timeOut)}
+    },[startDate, token, endDate])
     
     const onSubmit = (event: FormEvent) => {
         event.preventDefault()
         getData()
     }
 
+    // the form prevents date going out of the 2017-05-01 and 2017-06-15 range (as per requested from the assignment)
+    // also the input chooses the type= date to allows easier input and typechecking the date
+    // it also make sure the start_date never goes over end_date and vice versa
     return (
         <div style={style}>
             <form onSubmit={onSubmit} style={{margin: 'auto', display: 'flex', flexDirection: 'column', width: '80%'}}>
@@ -39,6 +50,7 @@ const SearchBar = () => {
                         value ={startDate}
                         onChange = {(ev) => {
                             const newDate = new Date(ev.target.value)
+                            // this is to get the day month year part of the date without the hassle of the hour-minute part
                             setStartDate(newDate.toISOString().split("T")[0])
                         }}
                     />
@@ -71,6 +83,16 @@ const SearchBar = () => {
                             }}
                     />
                 </div>
+                <button 
+                    onClick={() => {
+                        // the reset button allows for fast clearing of the input, wiping them in localStorage also
+                        setToken(''); 
+                        setStartDate('') ;
+                        setEndDate('')}}
+                    style= {resetButton}
+                    className = 'hover'
+                    > Reset
+                </button>
             </form>
         </div>
     )
@@ -90,6 +112,14 @@ const inputSegment: React.CSSProperties = {
     marginTop: '0.5rem',
     width: '90%',
     maxWidth: '800px'
+}
+
+const resetButton : React.CSSProperties = {
+    fontFamily: 'Courier',
+    textAlign: 'center',
+    height: '2.5rem',
+    width: '5rem',
+    margin: ' 1rem auto'
 }
 
 const input: React.CSSProperties = {

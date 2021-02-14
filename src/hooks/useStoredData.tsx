@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 
+// custom hook for saving data into localStorage and serve data from localStorage on start up.
 export const useStoredData = (type: string, defaultValue?: string) => {
     type useStoredDataRes = [
         data: string,

@@ -1,9 +1,3 @@
-const Footer = () => {
-    return (
-        <div style = {{height: '5rem'}}>
-
-        </div>
-    )
-}
-
+// empty elements for now
+const Footer = () => <div style = {{height: '5rem'}}/>
 export default Footer

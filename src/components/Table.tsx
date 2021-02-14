@@ -36,8 +36,8 @@ const Table = (props: {list?: datum[], displayNumber: number}) => {
         return width < 380 ? 
             <MobileRow 
                 key={i.date.toString()+'..'+index} 
-                elements = {[i.date.toString(), i.conversation_count, i.missed_chat_count, i.visitors_with_conversation_count]}
-                values={['Date', 'Conversation Count', 'Missed Chat Count', 'Visitors with conversation count']}/> 
+                values = {[i.date.toString(), i.conversation_count, i.missed_chat_count, i.visitors_with_conversation_count]}
+                valuesName={['Date', 'Conversation Count', 'Missed Chat Count', 'Visitors with conversation count']}/> 
             :<Row
                 key={i.date.toString()+'..'+index}
                 bold= {false} 

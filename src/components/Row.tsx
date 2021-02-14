@@ -1,3 +1,4 @@
+// the default row element for the table, this is optimal for desktop viewing
 const Row = (props:{elements: (string | number)[], bold: boolean}) => {
     const style: React.CSSProperties = {
         display: 'flex',
