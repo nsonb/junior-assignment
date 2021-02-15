@@ -30,3 +30,29 @@ code {
   width: fit-content;
   width: -moz-fit-content;
 }
+
+
+/*scrollbar*/
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 3px;
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: grey; 
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb { 
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-corner {
+  display: none;
+}
