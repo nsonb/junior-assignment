@@ -12,11 +12,12 @@ const Result = () => {
     // design responsive website instead of using the usual media querry and css
     const myRef = useRef<HTMLDivElement>(null)
     const { width } = useContainerDimensions(myRef as unknown as refElement)
+    console.log(width)
     // elements are optimized to screensize
     const boxContainer: React.CSSProperties = {
         width: '80%',
         display: 'flex',
-        flexDirection: width >600 ?'row' : 'column',
+        flexDirection: width >=600 || width === 0?'row' : 'column',
         alignContent: 'center',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -33,8 +34,8 @@ const Result = () => {
 
     // the data obtained from context is passed down to the table component to render out the information
     return (
-        <div ref={myRef}>
-            <div style={boxContainer}>
+        <div>
+            <div style={boxContainer} ref={myRef}>
                 <BoxDisplay number={data?.total_conversation_count.toString() || ''} title='total conversation count'/>
                 <BoxDisplay number={data?.total_user_message_count.toString() || ''} title='total user message count'/>
                 <BoxDisplay number={data?.total_visitor_message_count.toString() || ''} title='total visitor message count'/>

@@ -19,10 +19,12 @@ export const DataContextProvider =  (props: props) => {
                 }).catch((err: AxiosError) => {
                     switch(err.response?.status) {
                         case 401:
+                            // only the 401, which is for unauthorized access, is caught by the case
+                            // other possible errors are handled by the default clause for now. 
                             setData('Unauthorized. Input your provided token')
                             break
                         default:
-                            setData('Unknown Error.')
+                            setData('Unknown Error')
                             break
                     }
                     console.log(err)
