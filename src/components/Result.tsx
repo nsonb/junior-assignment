@@ -1,12 +1,14 @@
 import { DataContext } from '../context/apiDataContext'
 import { useContext, useRef } from 'react'
 import { useContainerDimensions, refElement } from '../hooks/useContainerDimensions'
+
 import BoxDisplay from './BoxDisplay'
 import Table from './Table'
 import Graph from './Graph'
 
 const Result = () => {
     const { data } = useContext(DataContext)
+
     // the custom hook useContainerDimensions returns the current width of the elements, which allows
     // for changes of the elements size to adapt to screen size. This is an alternative method to 
     // design responsive website instead of using the usual media querry and css
@@ -17,7 +19,7 @@ const Result = () => {
     const boxContainer: React.CSSProperties = {
         width: '80%',
         display: 'flex',
-        flexDirection: width >=600 || width === 0?'row' : 'column',
+        flexDirection: width >=600 || width === 0? 'row' : 'column',
         alignContent: 'center',
         alignItems: 'center',
         justifyContent: 'space-between',

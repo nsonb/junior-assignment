@@ -10,8 +10,8 @@ const Graph = (props: {data?: datum[]}) => {
     const myRef = useRef<HTMLDivElement>(null)
     const { width, height } = useContainerDimensions(myRef as unknown as refElement)
     //const [currentDsplay, setCurrentDsplay] = useState('all')
-
     // updating the graph when new data is provided or data is changed
+    
     useEffect(()=>{
         console.log(props.data)
     }, [props.data, myRef])
