@@ -1,7 +1,6 @@
 # Junior Assignment
 
-This project was bootstrapped with create-react-app. (https://github.com/facebook/create-react-app) and typechecked\
-using typescript.
+This project was bootstrapped with create-react-app. (https://github.com/facebook/create-react-app) and typechecked using typescript.
 
 ## Project detail
 
